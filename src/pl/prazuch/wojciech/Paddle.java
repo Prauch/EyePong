@@ -1,3 +1,7 @@
+package pl.prazuch.wojciech;
+
+import javafx.scene.canvas.GraphicsContext;
+
 /**
  * Created by wojciechprazuch on 14.10.2017.
  */
@@ -7,8 +11,8 @@ public class Paddle implements Movable{
     private int width;
     private int height;
 
-    private int xPos;
-    private int yPos;
+    private double xPos;
+    private double yPos;
 
 
     Paddle(int height, int width, int xPos, int yPos){
@@ -26,7 +30,13 @@ public class Paddle implements Movable{
 
     }
 
-    public void Paint(){
+    public void Draw(GraphicsContext gc){
+
+        gc.fillRect(xPos, yPos, width, height);
+    }
+
+    @Override
+    public void Update() {
 
     }
 
@@ -34,6 +44,19 @@ public class Paddle implements Movable{
     public int getWidth() {
         return width;
     }
+
+
+    public double getNormalizedRelativeIntersectionY(double ballYPosWhenIntersected){
+
+        double relativeIntersectionY = (this.yPos + height/2) - ballYPosWhenIntersected;
+
+
+        double normalizedIntersectionY = (relativeIntersectionY/(height/2));
+
+        return normalizedIntersectionY;
+
+    }
+
 
     public void setWidth(int width) {
         this.width = width;
@@ -47,19 +70,19 @@ public class Paddle implements Movable{
         this.height = height;
     }
 
-    public int getxPos() {
+    public double getxPos() {
         return xPos;
     }
 
-    public void setxPos(int xPos) {
+    public void setxPos(double xPos) {
         this.xPos = xPos;
     }
 
-    public int getyPos() {
+    public double getyPos() {
         return yPos;
     }
 
-    public void setyPos(int yPos) {
+    public void setyPos(double yPos) {
         this.yPos = yPos;
     }
 }
