@@ -1,4 +1,4 @@
-package pl.prazuch.wojciech;
+package pl.prazuch.wojciech.pong;
 
 import javafx.application.Application;
 

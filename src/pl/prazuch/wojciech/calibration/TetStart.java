@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 
 import com.theeyetribe.client.GazeManager;
 import com.theeyetribe.client.data.CalibrationResult;
-import com.theeyetribe.client.data.Point2D;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -17,7 +16,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import pl.prazuch.wojciech.Pong;
+import pl.prazuch.wojciech.pong.Pong;
 //import pl.kasprowski.tet.screens.CalResultsScreen;
 //import pl.kasprowski.tet.screens.CalScreen;
 //import pl.kasprowski.tet.screens.TextScreen;

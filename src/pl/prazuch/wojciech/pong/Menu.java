@@ -1,4 +1,4 @@
-package pl.prazuch.wojciech; /**
+package pl.prazuch.wojciech.pong; /**
  * Created by wojciechprazuch on 26.10.2017.
  */
 
