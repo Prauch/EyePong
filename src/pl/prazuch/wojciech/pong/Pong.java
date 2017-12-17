@@ -4,6 +4,9 @@ package pl.prazuch.wojciech.pong; /**
 import java.awt.*;
 import java.util.ArrayList;
 
+import com.theeyetribe.client.GazeManager;
+import com.theeyetribe.client.IGazeListener;
+import com.theeyetribe.client.data.GazeData;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -16,11 +19,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import pl.prazuch.wojciech.calibration.TetStart;
 import pl.prazuch.wojciech.communication.ClientSocket;
 import pl.prazuch.wojciech.communication.DataFromClient;
 import pl.prazuch.wojciech.communication.DataToClient;
 
-public class Pong extends Application {
+public class Pong extends Application implements IGazeListener {
 
 
     private ArrayList<Movable> gameObjects = new ArrayList<>();
@@ -36,6 +40,7 @@ public class Pong extends Application {
     Paddle player1;
     Paddle player2;
 
+//    GazeManager gm;
 
     DataToClient dataToClient;
     DataFromClient dataFromClient;
@@ -51,6 +56,12 @@ public class Pong extends Application {
         dataFromClient = new DataFromClient();
         dataToClient = new DataToClient();
         clientSocket = new ClientSocket();
+
+//        boolean success =  gm.
+//        gm.addGazeListener(this);
+
+        GazeManager.getInstance().addGazeListener(this);
+
 
         ball = new Ball(15, width/2, height/2, 2, 2);
         player1 = new Paddle(100, 15, 0, 0);
@@ -262,6 +273,11 @@ public class Pong extends Application {
         gc.fillRect(0, 0, width, height);
         gc.setFill(Color.WHITE);
         gc.setFont(Font.font(25));
+    }
+
+    @Override
+    public void onGazeUpdate(GazeData gazeData) {
+        player1.setyPos(gazeData.rawCoordinates.y);
     }
 
 //    private void TickComputersAI(double ballXPos, double ballYPos)
