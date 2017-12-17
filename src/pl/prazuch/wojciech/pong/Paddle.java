@@ -14,6 +14,16 @@ public class Paddle implements Movable{
     private double xPos;
     private double yPos;
 
+    private boolean shouldMove;
+
+
+    public boolean isShouldMove() {
+        return shouldMove;
+    }
+
+    public void setShouldMove(boolean shouldMove) {
+        this.shouldMove = shouldMove;
+    }
 
     Paddle(int height, int width, int xPos, int yPos){
 
@@ -83,6 +93,27 @@ public class Paddle implements Movable{
     }
 
     public void setyPos(double yPos) {
+
         this.yPos = yPos;
     }
+
+    public void moveInADirectionOf(double yPos)
+    {
+        int offset = (int) (yPos - (this.yPos-this.height/2));
+
+
+        if(offset > 0)
+        {
+
+            this.yPos+=8;
+        }
+        else
+        {
+            offset = -offset;
+            this.yPos-=8;
+        }
+
+
+    }
+
 }

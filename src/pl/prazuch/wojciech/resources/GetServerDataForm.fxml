@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pl.prazuch.wojciech.resources.GetServerDataForm"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <TextField id="server" fx:id="server" layoutX="115.0" layoutY="28.0" />
+        <TextField id="port"  fx:id="port" layoutX="115.0" layoutY="78.0" />
+        <Button layoutX="47.0" layoutY="180.0" mnemonicParsing="false" onAction="#getServerInfo" prefHeight="37.0" prefWidth="79.0" text="Create" />
+        <Text layoutX="29.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server:" wrappingWidth="69.677734375" />
+        <Text layoutX="29.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Port:" wrappingWidth="69.677734375" />
+    </children>
+
+
+</AnchorPane>
