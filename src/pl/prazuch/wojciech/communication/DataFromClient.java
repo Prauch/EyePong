@@ -3,6 +3,9 @@ package pl.prazuch.wojciech.communication;
 /**
  * Created by wojciechprazuch on 30.11.2017.
  */
+
+
+
 public class DataFromClient {
 
 

@@ -20,8 +20,8 @@ public class ClientSocket {
 
     DataToClient dataToClient;
 
-    public ClientSocket() throws IOException {
-        socket = new Socket("localhost", 4444);
+    public ClientSocket(String hostname, String port) throws IOException {
+        socket = new Socket(hostname, Integer.parseInt(port));
         this.in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
         this.out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
         dataFromClient = new DataFromClient();
@@ -33,7 +33,7 @@ public class ClientSocket {
 
         ClientSocket cs = null;
         try {
-            cs = new ClientSocket();
+            cs = new ClientSocket(args[0], args[1]);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,11 +74,9 @@ public class ClientSocket {
 
     public DataToClient receiveDataToClient() {
         String text;
-        System.out.println("receiveDataToClient outside try");
         try {
             if((text = in.readLine()) != null)
             {
-                System.out.println("receiveDataToClient");
                 dataToClient.setDataToClient(text);
             }
 

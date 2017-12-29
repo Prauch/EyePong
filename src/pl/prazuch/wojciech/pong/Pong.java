@@ -35,6 +35,9 @@ public class Pong extends Application implements IGazeListener {
     private int scoreP2 = 0;
     private int gameStarted;
 
+    private String hostname;
+    private String port;
+
 
     Ball ball;
     Paddle player1;
@@ -47,6 +50,13 @@ public class Pong extends Application implements IGazeListener {
 
     ClientSocket clientSocket;
 
+
+    public Pong(String hostname, String port)
+    {
+        this.hostname = hostname;
+        this.port = port;
+    }
+
     public void start(Stage stage) throws Exception {
 
         width = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -55,12 +65,14 @@ public class Pong extends Application implements IGazeListener {
 
         dataFromClient = new DataFromClient();
         dataToClient = new DataToClient();
-        clientSocket = new ClientSocket();
+        clientSocket = new ClientSocket(hostname, port);
 
 //        boolean success =  gm.
 //        gm.addGazeListener(this);
 
-        //GazeManager.getInstance().addGazeListener(this);
+
+        GazeManager.getInstance().addGazeListener(this);
+
 
 
         ball = new Ball(15, width/2, height/2, 2, 2);
@@ -74,7 +86,7 @@ public class Pong extends Application implements IGazeListener {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Timeline tl = new Timeline(new KeyFrame(Duration.millis(Constants.dtInMiliseconds), e -> run(gc)));
         tl.setCycleCount(Timeline.INDEFINITE);
-        //canvas.setOnMouseMoved(e ->  player1.setyPos(e.getY()) );
+        canvas.setOnMouseMoved(e ->  player1.setyPos(e.getY()) );
         canvas.setOnMouseClicked(e ->  gameStarted = 1);
 
         stage.setScene(new Scene(new StackPane(canvas)));
@@ -142,6 +154,9 @@ public class Pong extends Application implements IGazeListener {
 
     }
 
+
+
+
     private boolean didPlayerMoveOutsideTheWindowBorder(Paddle player) {
         if(player.getyPos() + player.getHeight() > height)
             return true;
@@ -181,6 +196,9 @@ public class Pong extends Application implements IGazeListener {
         this.gameStarted = dataToClient.getGameActive();
 
     }
+
+
+
 
 //    private void centerBall(Ball ball){
 //        ball.setyPos(height/2);
@@ -275,13 +293,21 @@ public class Pong extends Application implements IGazeListener {
         gc.setFont(Font.font(25));
     }
 
+
     @Override
     public void onGazeUpdate(GazeData gazeData) {
 
-        if(Math.abs(gazeData.rawCoordinates.x-player1.getxPos()) < width / 2 )
+        if(doesPlayerLookAtHisHalfOfTheBoard(gazeData))
         player1.moveInADirectionOf(gazeData.rawCoordinates.y);
         else
             player1.setyPos(player1.getyPos());
+    }
+
+
+
+    private boolean doesPlayerLookAtHisHalfOfTheBoard(GazeData gazeData)
+    {
+        return Math.abs(gazeData.rawCoordinates.x-player1.getxPos()) < width / 2;
     }
 
 //    private void TickComputersAI(double ballXPos, double ballYPos)

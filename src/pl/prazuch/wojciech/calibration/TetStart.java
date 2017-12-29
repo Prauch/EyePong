@@ -3,6 +3,7 @@ package pl.prazuch.wojciech.calibration;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -36,6 +37,9 @@ public class TetStart extends Application {
 	static Logger log = Logger.getLogger(TetStart.class);
 
 	boolean calibrate = true;
+
+	String hostname;
+	String port;
 	
 	Stage stage;
 	Scene scene;
@@ -44,6 +48,14 @@ public class TetStart extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		try {
+
+			Parameters params = getParameters();
+			List<String> list = params.getRaw();
+			hostname = (String) list.get(0);
+			port = (String) list.get(1);
+
+
+
 			log.info("-------------------------------------------------------------------------------");
 			log.info("Application start");
 
@@ -51,6 +63,8 @@ public class TetStart extends Application {
 			me = this;
 			boolean works = GazeManager.getInstance().activate(GazeManager.ApiVersion.VERSION_1_0,
 					GazeManager.ClientMode.PUSH);
+
+
 			log.debug("works:" + works + " isConnected:" + GazeManager.getInstance().isConnected());
 
 			works = (works && GazeManager.getInstance().isConnected());
@@ -147,7 +161,7 @@ public class TetStart extends Application {
 
 	public void start() {
 		TextScreen tf = new TextScreen();
-		tf.start("To miejsce na wstawienie swojego kodu!", scene,
+		tf.start("Insert code here!", scene,
 				this, new Runnable() {
 					public void run() {
 						me.done();
@@ -155,7 +169,7 @@ public class TetStart extends Application {
 				});
 
 
-		Pong pong = new Pong();
+		Pong pong = new Pong(hostname, port);
 		try {
 			pong.start(stage);
 		} catch (Exception e) {
@@ -184,6 +198,7 @@ public class TetStart extends Application {
 	}
 
 	public static void main(String[] args) {
+
 		Application.launch(args);
 	}
 

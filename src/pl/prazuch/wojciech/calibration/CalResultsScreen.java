@@ -116,13 +116,13 @@ public class CalResultsScreen implements IGazeListener {
 		String txt = "";
 
 		if(error > 1.5) {
-			txt = "Konieczne powt�rzenie kalibracji ("+error+")";
+			txt = "You need to repeat the calibration ("+error+")";
 		}
 		else if(error > 1) {
-			txt = "Kalibracja niezbyt dobra ("+error+")";
+			txt = "Calibration not very good ("+error+")";
 		}
 		else {
-			txt = "Kalibracja przeprowadzona prawid�owo ("+error+")";
+			txt = "Calibration successful ("+error+")";
 		}
 
 
@@ -142,7 +142,7 @@ public class CalResultsScreen implements IGazeListener {
 		text.setText(txt);
 		grid.add(text,0,0);
 
-		final Button btn1 = new Button("Powt�rz kalibracj�");
+		final Button btn1 = new Button("Repeat");
 		btn1.setFont(new Font(30));
 		HBox hbBtn1 = new HBox(20);
 		hbBtn1.setAlignment(Pos.CENTER);
@@ -151,7 +151,7 @@ public class CalResultsScreen implements IGazeListener {
 			public void handle(ActionEvent event) {	mainApp.calibration();}
 		});
 
-		final Button btn2 = new Button("Kontynuuj");
+		final Button btn2 = new Button("Continue");
 		btn2.setFont(new Font(30));
 		HBox hbBtn2 = new HBox(20);
 		hbBtn2.setAlignment(Pos.CENTER);

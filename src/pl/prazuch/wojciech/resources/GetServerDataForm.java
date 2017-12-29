@@ -9,11 +9,11 @@ import java.awt.*;
  */
 public class GetServerDataForm {
 
-    @FXML
-    TextField server;
+   // @FXML
+    //TextField server;
 
-    @FXML
-    TextField port;
+    //@FXML
+    //TextField port;
 
 
     private String server;
@@ -27,19 +27,19 @@ public class GetServerDataForm {
     }
 
 
-    public String getLocalhost() {
-        return server;
-    }
-
-    public void setLocalhost(String server) {
-        this.server = server;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-    }
+//    public String getLocalhost() {
+//        return server;
+//    }
+//
+//    public void setLocalhost(String server) {
+//        this.server = server;
+//    }
+//
+//    public String getPort() {
+//        return port;
+//    }
+//
+//    public void setPort(String port) {
+//        this.port = port;
+//    }
 }
