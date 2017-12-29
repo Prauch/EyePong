@@ -19,10 +19,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import pl.prazuch.wojciech.calibration.TetStart;
 import pl.prazuch.wojciech.communication.ClientSocket;
 import pl.prazuch.wojciech.communication.DataFromClient;
 import pl.prazuch.wojciech.communication.DataToClient;
+
 
 public class Pong extends Application implements IGazeListener {
 
@@ -67,9 +67,11 @@ public class Pong extends Application implements IGazeListener {
         dataToClient = new DataToClient();
         clientSocket = new ClientSocket(hostname, port);
 
+
+        clientSocket.sendResolutionInformation(getInitialResolutionInfo());
+
 //        boolean success =  gm.
 //        gm.addGazeListener(this);
-
 
         GazeManager.getInstance().addGazeListener(this);
 
@@ -139,6 +141,12 @@ public class Pong extends Application implements IGazeListener {
 
         writeToDataFromClient();
         clientSocket.setDataFromClient(dataFromClient);
+
+        try {
+            Thread.sleep(30);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -344,11 +352,14 @@ public class Pong extends Application implements IGazeListener {
 
 
 
-
-
-
-
+    public String getInitialResolutionInfo()
+    {
+        return width + " " + height;
+    }
 
 
 
 }
+
+
+

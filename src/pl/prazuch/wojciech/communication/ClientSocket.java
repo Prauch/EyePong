@@ -72,6 +72,12 @@ public class ClientSocket {
 
     }
 
+    public void sendResolutionInformation(String resolutionInfo)
+    {
+        out.println(resolutionInfo);
+    }
+
+
     public DataToClient receiveDataToClient() {
         String text;
         try {
